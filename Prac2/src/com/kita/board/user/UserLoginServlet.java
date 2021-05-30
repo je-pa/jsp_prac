@@ -12,34 +12,30 @@ import org.mindrot.jbcrypt.BCrypt;
 import com.kita.board.MyUtils;
 
 @WebServlet("/user/login")
-public class LoginServlet extends HttpServlet {
+public class UserLoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		if(MyUtils.getLoginUser(request)!=null) {
-			response.sendRedirect("/board/list");
-			return;
-		}
-		MyUtils.openJSP("user/login", request, response);
+		MyUtils.openJSP("로그인", "user/login", request, response);
+		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		UserVO vo = new UserVO();
-		vo.setUid(request.getParameter("uid")); 
-		UserVO result = UserDAO.selUser(vo);
+		UserEntity param = new UserEntity();
+		param.setUid(request.getParameter("uid"));
+		UserEntity result = UserDAO.selUser(param);
 		
 		if(result==null) {
-			request.setAttribute("errMsg","아이디 없음");
-		}else if(BCrypt.checkpw(request.getParameter("upw"),result.getUpw()/*암호된게 뒤에로*/ )) {
+			request.setAttribute("errMsg", "아이디없음");
+		}else if(BCrypt.checkpw(request.getParameter("upw"),result.getUpw() )) {
 			result.setUpw(null);
-			
 			request.getSession().setAttribute("loginUser", result);
 			response.sendRedirect("/board/list");	
 			return;
 		}else {
-			request.setAttribute("errMsg","비밀번호 확인해라");
-		}	
-		doGet(request,response);
+			request.setAttribute("errMsg", "비밀번호틀림");
+		}
+		doGet(request, response);
 	}
 
 }

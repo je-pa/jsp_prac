@@ -1,17 +1,30 @@
 package com.kita.board.user;
 
-public class UserVO {
+public class UserEntity {
 	private int iuser;
+	private int gender;
+	private String unm;
 	private String uid;
 	private String upw;
-	private String unm;
-	private int gender;
 	private String regdt;
+	private String profileImg;
 	public int getIuser() {
 		return iuser;
 	}
 	public void setIuser(int iuser) {
 		this.iuser = iuser;
+	}
+	public int getGender() {
+		return gender;
+	}
+	public void setGender(int gender) {
+		this.gender = gender;
+	}
+	public String getUnm() {
+		return unm;
+	}
+	public void setUnm(String unm) {
+		this.unm = unm;
 	}
 	public String getUid() {
 		return uid;
@@ -25,22 +38,17 @@ public class UserVO {
 	public void setUpw(String upw) {
 		this.upw = upw;
 	}
-	public String getUnm() {
-		return unm;
-	}
-	public void setUnm(String unm) {
-		this.unm = unm;
-	}
-	public int getGender() {
-		return gender;
-	}
-	public void setGender(int gender) {
-		this.gender = gender;
-	}
 	public String getRegdt() {
 		return regdt;
 	}
 	public void setRegdt(String regdt) {
 		this.regdt = regdt;
 	}
+	public String getProfileImg() {
+		return profileImg;
+	}
+	public void setProfileImg(String profileImg) {
+		this.profileImg = profileImg;
+	}
+	
 }
